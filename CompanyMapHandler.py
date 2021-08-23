@@ -6,6 +6,7 @@ Facebook Intrinsic Value Calculation (FB Stock)
 '''
 import requests
 import logging
+from datetime import date
 from enum import Enum
 
 from Company import Company
@@ -26,17 +27,14 @@ class CompanyMapHandler():
             file = "extra/nasdaq_screener_1629672200240.csv"
         with open(file, "r") as reader:
             lines = reader.readlines()
-            counter=0
+            counter = 0
             for line in lines:
-                counter+=1
-                if counter==1:
+                counter += 1
+                if counter == 1:
                     continue
                 symbol, name, country, ipoYear, sector, industry = line.strip().split(",")
-                self.company[symbol.lower()] = Company(name=name, ticker=symbol, sector=sector, ipoYear= ipoYear, industry=industry)
+                self.company[symbol.lower()] = Company(name=name, ticker=symbol, sector=sector, ipoYear=ipoYear,
+                                                       industry=industry, date=date.today().strftime("%d/%m/%Y"))
         reader.close()
         print(self.company["now"])
         return self.company
-
-
-
-
