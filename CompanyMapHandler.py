@@ -4,13 +4,10 @@ This copy right property of please do not use without approval.
 Facebook Intrinsic Value Calculation (FB Stock)
 
 '''
-import requests
-import logging
+
 from datetime import date
 from enum import Enum
-
 from Company import Company
-from SimpleRestClient import SimpleRestClient
 
 
 class Source(Enum):

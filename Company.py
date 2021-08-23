@@ -21,6 +21,7 @@ Stocks (Common, Preferred ):While equity describes ownership, a stock describes 
 
 '''
 
+import yfinance as yf
 from enum import Enum
 
 
@@ -42,16 +43,101 @@ class Company():
         self._date = date
         self._peRatio = peRatio
         self._marginOfSaftyPrice = 0.0
-        self._debt = debt
+        self._totalDebt = debt
         self._freeCashFlow = freeCashFlow
         self._growthRate = growthRate
         self._marketCap = marketCap
         self._ipoYear = ipoYear
-        self._volume = volume
+        self._volume24Hr = volume
         self._sector = sector
         self._industry = industry
         self._buyingOption = BuyingOption.DID_NOT_EVALUATE
 
+        self._revenue = 0.0
+        self._info = {}
+        #below are not used and park of info
+        # self._epm = 0.0
+        # self._operatingCashflow = 0.0
+        # self._revenueGrowth = 0.0
+        # self._operatingMargins = 0.0
+        # self._ebitda = 0.0  # earnings before interest, taxes, depreciation, and amortization
+        # self._grossProfits = 0.0
+        # self._freeCashflow = 0.0
+        # self._earningsGrowth = 0.0
+        # # The _currentRatio is a measure of how likely a company is to be able to pay its debts in the short term.
+        # # Short-term debts are generally money owed within a year. It is essentially a liquidity ratio, measuring a
+        # # firm’s assets versus how much it owes.
+        # self._currentRatio = 0.0
+        # self._numberOfAnalystOpinions = 0.0
+        # self._debtToEquity = 0.0
+        # self._returnOnEquity = 0.0
+        # self._totalCash = 0.0
+        # self._totalRevenue = 0.0
+        # self._totalCashPerShare = 0.0
+        # # The quick ratio measures how well a company can meet its short-term liabilities.
+        # # The quick ratio (QR) is calculated through the following formula:
+        # # QuickRatio = (Cash and Cash Equivalent + Liquid Securities + Accounts Receivable) / Short-Term Liabilities
+        # self._revenuePerShare = 0.0
+        # self._exchange = ""
+        # self._enterpriseToEbitda = 0.0
+        # #
+        # self._52WeekChange = 0.0
+        # self._morningStarRiskRating="None"
+        # self._bookValue =  0.0
+        # self._sharesShort =0.0
+        # self._trailingEps = 0.0
+        # self._lastDividendValue =0.0
+        # self._shortRatio = 0.0
+        # self._threeYearAverageReturn = 0.0
+        # self._earningsQuarterlyGrowth = 0.0
+        # self._priceToSalesTrailing12Months =0.0
+        # # “PEG” stands for price-earnings-to-growth. The price-earnings-to-growth ratio is calculated through the basic formula:
+        # #
+        # #     PEG = (price-to-earnings ratio) / (expected earnings growth rate)
+        # self._pegRatio = 0.0
+        # self._forwardPE = 0.0
+        # self._averageDailyVolume10Day=0
+        # self._regularMarketVolume = 0
+        # self._averageVolume =0
+        # self._volume = 0
+        #
+
+
+    ''' 
+    generates:
+        1) StockPrice
+        2) peRatio
+        3) debt
+        4) freeCashFlow
+        5) growthRate
+        6)marketCap
+        7) volume
+        8) buyingOption
+        
+    '''
+
+
+
+    def process(self):
+        info=self.info
+        # print(info)
+
+        for key in ( info.keys()):
+            print(key, info[key])
+            # print(key, info(key))
+
+        # self.stockPrice= info.get("currentPrice")
+        # self.peRation = info.get("trailingPE") # or self.peRation(self.info("forwardPE"))
+        # self.freeCashFlow = info.get("freeCashflow")
+        # # self.growthRate = info.get()
+        print(self)
+
+
+    @property
+    def info(self):
+        value=yf.Ticker(self.ticker)
+        self._info = value.get_info()
+        return self._info
     # todo calculate it
     @property
     def marginOfSafty(self):
@@ -108,12 +194,12 @@ class Company():
         self._peRatio = ratio
 
     @property
-    def debt(self):
-        return self._debt
+    def totalDebt(self):
+        return self._totalDebt
 
-    @debt.setter
-    def debt(self, debt):
-        self._debt = debt
+    @totalDebt.setter
+    def totalDebt(self, totalDebt):
+        self._totalDebt = totalDebt
 
     @property
     def freeCashFlow(self):
@@ -162,6 +248,6 @@ self._displayName = name
                + "', 'ipoYear':'" + self.ipoYear + "', 'industry':'" + self.industry + "', 'price':" + str(
             self.stockPrice) + ", 'peRation':" + str(
             self.peRation) + ", 'marginOfSaftyPrice': " + str(self.marginOfSaftyPrice) + ", 'debt':" + str(
-            self.debt) + ", 'freeCashFlow':" + str(self.freeCashFlow) + ", 'growthRate':" + str(
+            self.totalDebt) + ", 'freeCashFlow':" + str(self.freeCashFlow) + ", 'growthRate':" + str(
             self._growthRate) + ", 'marketCap':" + str(
             self.marketCap) + ", 'date':" + self.date + ", 'buyingOption':'" + str(self.buyingOption.value) + "' }"
