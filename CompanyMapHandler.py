@@ -16,7 +16,7 @@ class Source(Enum):
     NASDAQ = "https://api.nasdaq.com/api/screener/stocks"
 
 
-class GetCompanyMap():
+class CompanyMapHandler():
     def __init__(self):
         # get list of campany from DB and
         self.company = {}
@@ -32,8 +32,9 @@ class GetCompanyMap():
                 if counter==1:
                     continue
                 symbol, name, country, ipoYear, sector, industry = line.strip().split(",")
-                self.company[name] = Company(name=name, ticker=symbol, sector=sector, ipoYear= ipoYear, industry=industry)
+                self.company[symbol.lower()] = Company(name=name, ticker=symbol, sector=sector, ipoYear= ipoYear, industry=industry)
         reader.close()
+        print(self.company["now"])
         return self.company
 
 

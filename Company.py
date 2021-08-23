@@ -19,45 +19,69 @@ class Company():
     def __init__(self, name, ticker, price=-1, date=None, peRatio=None, debt=None, equity=None, freeCashFlow=None,
                  growthRate=None, marketCap=None, ipoYear="1900",
                  volume=None, sector="", industry=""):
-        self.displayName = name
-        self.ticker = ticker
-        self.stockPrice = price
-        self.equity = equity
-        self.date = date
-        self.peRatio = peRatio
-        self.marginOfSaftyPrice = 0.0
-        self.debt = debt
-        self.freeCashFlow = freeCashFlow
-        self.growthRate = growthRate
-        self.marketCap = marketCap
-        self.ipoYear = ipoYear
-        self.volume = volume
-        self.sector = sector
-        self.industry = industry
-        self.buyingOption = BuyingOption.DID_NOT_EVALUATE
+        self._displayName = name
+        self._ticker = ticker
+        self._stockPrice = price
+        self._equity = equity
+        self._date = date
+        self._peRatio = peRatio
+        self._marginOfSaftyPrice = 0.0
+        self._debt = debt
+        self._freeCashFlow = freeCashFlow
+        self._growthRate = growthRate
+        self._marketCap = marketCap
+        self._ipoYear = ipoYear
+        self._volume = volume
+        self._sector = sector
+        self._industry = industry
+        self._buyingOption = BuyingOption.DID_NOT_EVALUATE
 
     # todo calculate it
-    def getMarginOfSafty(self):
-        self.marginOfSaftyPrice = 0  # todo
-        return self.marginOfSaftyPrice
+    @property
+    def marginOfSafty(self):
+        return self._marginOfSaftyPrice
 
-    def fillBuyingOption(self):
-        pass
+    # todo some logic required
+    @marginOfSafty.setter
+    def marginOfSaftyPrice(self, price):
+        self._marginOfSaftyPrice = price
 
-    def tenYearDiscountPrice(self):
-        pass
+    @property
+    def buyingOption(self):
+        self._buyingOption
 
-    def fiveYearDiscountPrice(self):
-        pass
+    @buyingOption.setter
+    def buyingOption(self, option):
+        # TODO some logic required
+        self._buyingOption = option
 
-    def fillPERation(self):
-        pass
+    @property
+    def displayName(self):
+        return self._displayName
 
-    def fillFreeCashFlow(self):
-        pass
+    @property
+    def ticker(self):
+        return self._ticker
 
-    def fillGrowthRate(self):
-        pass
+    @property
+    def industry(self):
+        return self._industry
 
-    def filEquity(self):
-        pass
+    @property
+    def sector(self):
+        return self._sector
+
+    @property
+    def ipoYear(self):
+        return self._ipoYear
+
+    @property
+    def stockPrice(self):
+        return self._stockPrice
+    @stockPrice.setter
+    def stockPrice(self , price):
+        self._stockPrice = price
+
+    def __str__(self):
+        return "{" + "'Name':'" + self.displayName + "', 'Symbol':'" + self.ticker + "', 'sector':" + self.sector \
+               + "', 'ipoYear':'" + self.ipoYear + "', 'industry':'" + self.industry +  "', 'price':'" + str(self.stockPrice)  + "'}"

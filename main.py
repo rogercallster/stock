@@ -11,14 +11,14 @@
 
 
 '''
-from GetCompanyMap import GetCompanyMap
+from CompanyMapHandler import CompanyMapHandler
 
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
-    t=GetCompanyMap ()
+    t=CompanyMapHandler ()
     # //get list of companies with basic items filled.This will be map of Companies class
     # KEY : Name of company
     #value : ticker
