@@ -11,9 +11,21 @@
 
 
 '''
+from GetCompanyMap import GetCompanyMap
+
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+
+    t=GetCompanyMap ()
+    # //get list of companies with basic items filled.This will be map of Companies class
+    # KEY : Name of company
+    #value : ticker
+    # this function takes in file name to generate map by default its file inside extra/nasdaq_screener_xxxxx.csv
+    companieyMap = t.getTickersFromStockExchange(None)
+
+
 
 
 # Press the green button in the gutter to run the script.

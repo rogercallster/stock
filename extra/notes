@@ -1,0 +1,63 @@
+
+
+1. companies value = debt to equity ratio :: write code
+2. margin of safety value : code ready
+3. RED FLAG —> If company is selling several times its growth rate and earning it red flag
+4. RED FLAG-> DEBT VS EQUITY.
+5. Keep ur story up to date. Check fundamentals
+6. income statements provides : todo
+7. net growth rate: todo
+8. knowing industry specifics debt to capitalization is very important to know
+9. add up long term debt and total equity and that is good approximation of company capitalization (now compare long term debt to total capitalization... If total debt is more than half the company capitalizaation or more than its too much of debt.. In contast if debt is 20% or less is faily low debt)
+10. Book value
+11. Sales growth vs price growth
+12. Market size and saturation
+
+Checklists of valuation
+
+1. 10 cap calculation
+2. Pin point growth rate
+3. My projection of earning and cash flow does not reaches industrial cap
+4. Confident that P/E ratio is reasonable
+5. Using historical starting point for growing earning .. is this year a anomaly
+6. Reasonable acceptable rate of return ie discount rate at ~15%
+7. Factor into reasonable capital expenditure ie earning and cash flow
+8. Cyclicality of industry ..
+9. Go big with confidence 20%
+
+
+1. capable of understanding business
+2. Business with intriguing nsic characteristic that give it durable competitive advances
+3. A experience management
+4. Its never worth infinite price and have a sense to give sense of safety
+
+
+    Motes:
+    ------
+1. Security : PATENTS AND ip TRADEMARK ETC
+2. Toll bridge :  ABSOLUTE CONTROL
+3. Cost/Price: GOOD TECH LEADING TO CHEAP PRODUCT . Scale based UPS/FEDEX VS DHL
+4. Brand Name: Coca Cola , rasna, Colgate
+5. Switching mote: IBM 360 , iPhone
+More details Pat Dorsey: "The Little Book that Builds Wealth" | Talks at Google
+https://www.youtube.com/watch?v=YFS5JBgz1Xc
+
+
+Valuation formula
+
+1. Free cash flow growth
+2. Sales growth
+3. Profit growth
+4. Debts
+Important ratio
+1. debt to equity
+2. Pe
+
+================
+
+
+Sources:
+1)
+NYSDAQ:
+curl 'https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=0&download=true' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0' -H 'Accept: application/json, text/plain, */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Origin: https://www.nasdaq.com' -H 'Connection: keep-alive' -H 'Referer: https://www.nasdaq.com/' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-site'
+ https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=0&download=true
