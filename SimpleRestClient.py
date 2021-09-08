@@ -8,7 +8,6 @@ class SimpleRestClient:
         self.response = None
 
     def getClient(self, url):
-        self.response = requests.get(url)
-        print(self.response)
-        return self.response
+        headers = {"Cookie":"B=a8achhdgjfutf&b=3&s=78"}
+        return requests.get(url,headers)
 

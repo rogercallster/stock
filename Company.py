@@ -1,6 +1,7 @@
 '''
 This copy right property of please do not use without approval.
 '''
+from SimpleRestClient import SimpleRestClient
 
 '''
 Equity :  Equity indicates an ownership position in an asset. In most cases, equity indicates a total ownership stake in
@@ -20,7 +21,7 @@ Stocks (Common, Preferred ):While equity describes ownership, a stock describes 
  of your ownership stake. There are two main types of stock that companies issue:
 
 '''
-
+from html.parser import HTMLParser
 import yfinance as yf
 from enum import Enum
 
@@ -33,29 +34,73 @@ class BuyingOption(Enum):
     DID_NOT_EVALUATE = "This stock is not yet evaluated"
 
 
+class RateOfReturn(Enum):
+    THREE = 3
+    SIX = 6
+    TEN = 10
+    TWELVE = 12
+    FIFTEEN = 15
+    TWENTY = 20
+    TWENTY_FIVE = 25
+    THIRTY = 30
+    THIRTY_THREE = 33
+
+
+class Time(Enum):
+    FIVE_YEAR = 5
+    TEN_YEAR = 10
+
+    '''
+    EPS TTM
+    Growth rate
+    Minimum rate of return
+    Margin of safety 
+    P/E ratio 
+
+    '''
+
+
 class Company():
-    def __init__(self, name, ticker, price=-1, date=None, peRatio=0, debt=0.0, freeCashFlow={},
-                 growthRate={}, marketCap=0.0, ipoYear="1900",
-                 volume=None, sector="", industry=""):
-        self._displayName = name
+    '''
+    debt=0.0,
+    freeCashFlow={},
+    '''
+    def __init__(self, name, ticker, price=-1, date=None, peRatio=0,
+                 marketCap=0.0, ipoYear="1900",  sector="", industry=""):
+        self._url="https://finance.yahoo.com/quote/"+ticker +"/analysis"
         self._ticker = ticker
+        self._displayName = name
         self._stockPrice = price
         self._date = date
         self._peRatio = peRatio
-        self._marginOfSaftyPrice = 0.0
-        self._totalDebt = debt
-        self._freeCashFlow = freeCashFlow
-        self._growthRate = growthRate
-        self._marketCap = marketCap
-        self._ipoYear = ipoYear
-        self._volume24Hr = volume
         self._sector = sector
+        self._marketCap = marketCap
         self._industry = industry
-        self._buyingOption = BuyingOption.DID_NOT_EVALUATE
+        self._ipoYear = ipoYear
 
-        self._revenue = 0.0
-        self._info = {}
-        #below are not used and park of info
+        self._growthRate = {Time.FIVE_YEAR: 0, Time.TEN_YEAR: 0}
+        self._marginOfSaftyPrice = 0.0
+        # todo Lazy load info and handle error
+        self._info = None
+        self._trailingEps = 0.0
+        self.minimumRateOfReturn ={}
+        # {RateOfReturn.THREE: None, RateOfReturn.SIX: None, RateOfReturn.TE: None,
+        #                             RateOfReturn.TWELVE: None, RateOfReturn.FIFTEEN: None, RateOfReturn.TWENTY: None,
+        #                             RateOfReturn.TWENTY_FIVE: None, RateOfReturn.THIRTY: None,
+        #                             RateOfReturn.THIRTY_THREE: None}
+
+        # self._totalDebt = debt
+        # self._freeCashFlow = freeCashFlow
+
+
+        # self._volume24Hr = volume
+        #
+
+        # self._buyingOption = BuyingOption.DID_NOT_EVALUATE
+        #
+        # self._revenue = 0.0
+
+        # below are not used and park of info
         # self._epm = 0.0
         # self._operatingCashflow = 0.0
         # self._revenueGrowth = 0.0
@@ -85,7 +130,7 @@ class Company():
         # self._morningStarRiskRating="None"
         # self._bookValue =  0.0
         # self._sharesShort =0.0
-        # self._trailingEps = 0.0
+
         # self._lastDividendValue =0.0
         # self._shortRatio = 0.0
         # self._threeYearAverageReturn = 0.0
@@ -102,7 +147,6 @@ class Company():
         # self._volume = 0
         #
 
-
     ''' 
     generates:
         1) StockPrice
@@ -116,28 +160,31 @@ class Company():
         
     '''
 
-
-
     def process(self):
-        info=self.info
+        info = self.info
         # print(info)
-
-        for key in ( info.keys()):
-            print(key, info[key])
-            # print(key, info(key))
 
         # self.stockPrice= info.get("currentPrice")
         # self.peRation = info.get("trailingPE") # or self.peRation(self.info("forwardPE"))
         # self.freeCashFlow = info.get("freeCashflow")
         # # self.growthRate = info.get()
         print(self)
+        restclient= SimpleRestClient()
+        htmlResponse = restclient.getClient(self._url)
+        print("-------- \n\n\n\n")
+        print(htmlResponse)
+        print("-------- \n\n\n\n")
 
+        # response  = HTMLParser.handle_data(htmlResponse)
+        return info
 
     @property
     def info(self):
-        value=yf.Ticker(self.ticker)
+        value = yf.Ticker(self.ticker)
+        print(value.get_recommendations())
         self._info = value.get_info()
         return self._info
+
     # todo calculate it
     @property
     def marginOfSafty(self):
@@ -243,11 +290,11 @@ self._displayName = name
         self._buyingOption = BuyingOption.DID_NOT_EVALUATE
     '''
 
-    def __str__(self):
-        return "{ " + "'Name':'" + self.displayName + "', 'Symbol':'" + self.ticker + "', 'sector':" + self.sector \
-               + "', 'ipoYear':'" + self.ipoYear + "', 'industry':'" + self.industry + "', 'price':" + str(
-            self.stockPrice) + ", 'peRation':" + str(
-            self.peRation) + ", 'marginOfSaftyPrice': " + str(self.marginOfSaftyPrice) + ", 'debt':" + str(
-            self.totalDebt) + ", 'freeCashFlow':" + str(self.freeCashFlow) + ", 'growthRate':" + str(
-            self._growthRate) + ", 'marketCap':" + str(
-            self.marketCap) + ", 'date':" + self.date + ", 'buyingOption':'" + str(self.buyingOption.value) + "' }"
+    # def __str__(self):
+    #     return "{ " + "'Name':'" + self.displayName + "', 'Symbol':'" + self.ticker + "', 'sector':" + self.sector \
+    #            + "', 'ipoYear':'" + self.ipoYear + "', 'industry':'" + self.industry + "', 'price':" + str(
+    #         self.stockPrice) + ", 'peRation':" + str(
+    #         self.peRation) + ", 'marginOfSaftyPrice': " + str(self.marginOfSaftyPrice) + ", 'debt':" + str(
+    #         self.totalDebt) + ", 'freeCashFlow':" + str(self.freeCashFlow) + ", 'growthRate':" + str(
+    #         self._growthRate) + ", 'marketCap':" + str(
+    #         self.marketCap) + ", 'date':" + self.date + ", 'buyingOption':'" + str(self.buyingOption.value) + "' }"

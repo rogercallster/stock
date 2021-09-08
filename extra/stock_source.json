@@ -1,81 +1,11 @@
-
-
-1. companies value = debt to equity ratio :: write code
-2. margin of safety value : code ready
-3. RED FLAG —> If company is selling several times its growth rate and earning it red flag
-4. RED FLAG-> DEBT VS EQUITY.
-5. Keep ur story up to date. Check fundamentals
-6. income statements provides : todo
-7. net growth rate: todo
-8. knowing industry specifics debt to capitalization is very important to know
-9. add up long term debt and total equity and that is good approximation of company capitalization (now compare long term debt to total capitalization... If total debt is more than half the company capitalizaation or more than its too much of debt.. In contast if debt is 20% or less is faily low debt)
-10. Book value
-11. Sales growth vs price growth
-12. Market size and saturation
-
-Checklists of valuation
-
-1. 10 cap calculation
-2. Pin point growth rate
-3. My projection of earning and cash flow does not reaches industrial cap
-4. Confident that P/E ratio is reasonable
-5. Using historical starting point for growing earning .. is this year a anomaly
-6. Reasonable acceptable rate of return ie discount rate at ~15%
-7. Factor into reasonable capital expenditure ie earning and cash flow
-8. Cyclicality of industry ..
-9. Go big with confidence 20%
-
-
-1. capable of understanding business
-2. Business with intriguing nsic characteristic that give it durable competitive advances
-3. A experience management
-4. Its never worth infinite price and have a sense to give sense of safety
-
-
-    Motes:
-    ------
-1. Security : PATENTS AND ip TRADEMARK ETC
-2. Toll bridge :  ABSOLUTE CONTROL
-3. Cost/Price: GOOD TECH LEADING TO CHEAP PRODUCT . Scale based UPS/FEDEX VS DHL
-4. Brand Name: Coca Cola , rasna, Colgate
-5. Switching mote: IBM 360 , iPhone
-More details Pat Dorsey: "The Little Book that Builds Wealth" | Talks at Google
-https://www.youtube.com/watch?v=YFS5JBgz1Xc
-
-
-Valuation formula
-
-1. Free cash flow growth
-2. Sales growth
-3. Profit growth
-4. Debts
-Important ratio
-1. debt to equity
-2. Pe
-
-================
-
-
-Sources:
-1)
-NYSDAQ:
-curl 'https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=0&download=true' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0' -H 'Accept: application/json, text/plain, */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Origin: https://www.nasdaq.com' -H 'Connection: keep-alive' -H 'Referer: https://www.nasdaq.com/' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-site'
- https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=0&download=true
-
-
- ============================================================================================================================
-
-
- Sample info response
- ----------------------
- 
-
- {
+{
     "zip": "95054",
     "sector": "Technology",
     "fullTimeEmployees": 13096,
     "longBusinessSummary": "ServiceNow, Inc. provides enterprise cloud computing solutions that defines, structures, consolidates, manages, and automates services for enterprises worldwide. It operates the Now platform that offers workflow automation, artificial intelligence, machine learning, performance analytics, electronic service catalogs and portals, configuration management systems, data benchmarking, encryption, and collaboration and development tools. The company also provides information technology (IT) service management applications; IT service management product suite for enterprise's employees, customers, and partners; IT business management product suite to manage IT priorities; IT operations management product that connects a customer's physical and cloud-based IT infrastructure; IT Asset Management to automate IT asset lifecycles; and enterprise development operations product for developers' toolchain. In addition, it offers security incident management, threat enrichment intelligence, vulnerability response management, and security incident intelligence sharing security operation products; governance, risk, and compliance product to create policies and controls; human resources, legal, and workplace service delivery products; safe workplace applications; customer service management product; and field service management applications. Further, it provides App Engine product; IntegrationHub enables application to extend workflows; and professional, training, and customer support services. It serves government, financial services, healthcare, telecommunications, manufacturing, IT services, technology, oil and gas, education, and consumer products. It sells its products through direct sales team and resale partners. The company was formerly known as Service-now.com and changed its name to ServiceNow, Inc. in May 2012. The company was incorporated in 2004 and is headquartered in Santa Clara, California.",
-=    "state": "CA",
+    "city": "Santa Clara",
+    "phone": "408-501-8550",
+    "state": "CA",
     "country": "United States",
     "companyOfficers": [],
     "website": "http://www.servicenow.com",
@@ -94,12 +24,12 @@ curl 'https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=
     "grossProfits": 3532371000,
     "freeCashflow": 2069946112,
     "targetMedianPrice": 650,
-    "currentPrice": 600.52,
+    "currentPrice": 661.09,
     "earningsGrowth": 0.45,
     "currentRatio": 1.081,
     "returnOnAssets": 0.01869,
-    "numberOfAnalystOpinions": 30,
-    "targetMeanPrice": 651.29,
+    "numberOfAnalystOpinions": 31,
+    "targetMeanPrice": 655.15,
     "debtToEquity": 63.786,
     "returnOnEquity": 0.059270002,
     "targetHighPrice": 746,
@@ -123,10 +53,10 @@ curl 'https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=
     "messageBoardId": "finmb_22967487",
     "market": "us_market",
     "annualHoldingsTurnover": "None",
-    "enterpriseToRevenue": 22.835,
+    "enterpriseToRevenue": 25.827,
     "beta3Year": "None",
-    "enterpriseToEbitda": 186.483,
-    "52WeekChange": 0.34014726,
+    "enterpriseToEbitda": 210.922,
+    "52WeekChange": 0.53141224,
     "morningStarRiskRating": "None",
     "forwardEps": 7.22,
     "revenueQuarterlyGrowth": "None",
@@ -135,25 +65,25 @@ curl 'https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=
     "annualReportExpenseRatio": "None",
     "totalAssets": "None",
     "bookValue": 16.529,
-    "sharesShort": 4131919,
-    "sharesPercentSharesOut": 0.0209,
+    "sharesShort": 3972552,
+    "sharesPercentSharesOut": 0.0201,
     "fundFamily": "None",
     "lastFiscalYearEnd": 1609372800,
-    "heldPercentInstitutions": 0.89294,
+    "heldPercentInstitutions": 0.89088994,
     "netIncomeToCommon": 170503008,
     "trailingEps": 0.85,
     "lastDividendValue": "None",
-    "SandP52WeekChange": 0.29446447,
-    "priceToBook": 36.3313,
-    "heldPercentInsiders": 0.0037599998,
+    "SandP52WeekChange": 0.36123884,
+    "priceToBook": 39.99577,
+    "heldPercentInsiders": 0.00379,
     "nextFiscalYearEnd": 1672444800,
     "yield": "None",
     "mostRecentQuarter": 1625011200,
-    "shortRatio": 3.8,
-    "sharesShortPreviousMonthDate": 1625011200,
+    "shortRatio": 3.99,
+    "sharesShortPreviousMonthDate": 1626307200,
     "floatShares": 197435583,
-    "beta": 0.915008,
-    "enterpriseValue": 118089031680,
+    "beta": 0.920851,
+    "enterpriseValue": 133565358080,
     "priceHint": 2,
     "threeYearAverageReturn": "None",
     "lastSplitDate": "None",
@@ -162,62 +92,62 @@ curl 'https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=25&offset=
     "lastDividendDate": "None",
     "morningStarOverallRating": "None",
     "earningsQuarterlyGrowth": 0.439,
-    "priceToSalesTrailing12Months": 23.00365,
-    "dateShortInterest": 1627603200,
-    "pegRatio": 4.14,
+    "priceToSalesTrailing12Months": 25.323858,
+    "dateShortInterest": 1628812800,
+    "pegRatio": 4.61,
     "ytdReturn": "None",
-    "forwardPE": 83.17452,
+    "forwardPE": 91.56372,
     "lastCapGain": "None",
-    "shortPercentOfFloat": 0.0209,
-    "sharesShortPriorMonth": 3493256,
+    "shortPercentOfFloat": 0.0201,
+    "sharesShortPriorMonth": 3702083,
     "impliedSharesOutstanding": "None",
     "category": "None",
     "fiveYearAverageReturn": "None",
-    "previousClose": 586.92,
-    "regularMarketOpen": 591.05,
-    "twoHundredDayAverage": 529.6501,
+    "previousClose": 678.63,
+    "regularMarketOpen": 678.63,
+    "twoHundredDayAverage": 533.47516,
     "trailingAnnualDividendYield": "None",
     "payoutRatio": 0,
     "volume24Hr": "None",
-    "regularMarketDayHigh": 601.41,
+    "regularMarketDayHigh": 678.98,
     "navPrice": "None",
-    "averageDailyVolume10Day": 778783,
-    "regularMarketPreviousClose": 586.92,
-    "fiftyDayAverage": 576.60736,
+    "averageDailyVolume10Day": 1096140,
+    "regularMarketPreviousClose": 678.63,
+    "fiftyDayAverage": 598.6446,
     "trailingAnnualDividendRate": "None",
-    "open": 591.05,
+    "open": 678.63,
     "toCurrency": "None",
-    "averageVolume10days": 778783,
+    "averageVolume10days": 1096140,
     "expireDate": "None",
     "algorithm": "None",
     "dividendRate": "None",
     "exDividendDate": "None",
     "circulatingSupply": "None",
     "startDate": "None",
-    "regularMarketDayLow": 588.57,
+    "regularMarketDayLow": 660.205,
     "currency": "USD",
-    "trailingPE": 706.49414,
-    "regularMarketVolume": 1003469,
+    "trailingPE": 777.7529,
+    "regularMarketVolume": 1442059,
     "lastMarket": "None",
     "maxSupply": "None",
     "openInterest": "None",
-    "marketCap": 118963019776,
+    "marketCap": 130961932288,
     "volumeAllCurrencies": "None",
     "strikePrice": "None",
-    "averageVolume": 1176685,
-    "dayLow": 588.57,
-    "ask": 605,
-    "askSize": 900,
-    "volume": 1003469,
-    "fiftyTwoWeekHigh": 608.78,
+    "averageVolume": 1129618,
+    "dayLow": 660.205,
+    "ask": 661.5,
+    "askSize": 1000,
+    "volume": 1442059,
+    "fiftyTwoWeekHigh": 681.1,
     "fromCurrency": "None",
     "fiveYearAvgDividendYield": "None",
     "fiftyTwoWeekLow": 432.85,
-    "bid": 601,
+    "bid": 660,
     "tradeable": false,
     "dividendYield": "None",
     "bidSize": 1000,
-    "dayHigh": 601.41,
-    "regularMarketPrice": 600.52,
+    "dayHigh": 678.98,
+    "regularMarketPrice": 661.09,
     "logo_url": "https://logo.clearbit.com/servicenow.com"
 }

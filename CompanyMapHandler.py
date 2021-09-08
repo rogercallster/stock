@@ -2,7 +2,7 @@
 This copy right property of please do not use without approval.
 
 Facebook Intrinsic Value Calculation (FB Stock)
-
+How to Calculate Intrinsic Value (Apple Stock Example)
 '''
 
 from datetime import date
@@ -29,7 +29,9 @@ class CompanyMapHandler():
                 counter += 1
                 if counter == 1:
                     continue
+                print(line)
                 symbol, name, country, ipoYear, sector, industry = line.strip().split(",")
+
                 self.company[symbol.lower()] = Company(name=name, ticker=symbol, sector=sector, ipoYear=ipoYear,
                                                        industry=industry, date=date.today().strftime("%d/%m/%Y"))
         reader.close()
