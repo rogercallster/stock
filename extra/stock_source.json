@@ -48,7 +48,7 @@
     "exchangeTimezoneShortName": "EDT",
     "isEsgPopulated": false,
     "gmtOffSetMilliseconds": "-14400000",
-    "quoteType": "EQUITY",
+    "quoteTy    ": "EQUITY",
     "symbol": "NOW",
     "messageBoardId": "finmb_22967487",
     "market": "us_market",

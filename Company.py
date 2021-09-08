@@ -2,7 +2,7 @@
 This copy right property of please do not use without approval.
 '''
 from SimpleRestClient import SimpleRestClient
-
+from lxml import html
 '''
 Equity :  Equity indicates an ownership position in an asset. In most cases, equity indicates a total ownership stake in
  a company. So if, for example, you have a 15% equity in a company, you own 15% of that company and are entitled to 15%
@@ -67,7 +67,7 @@ class Company():
     '''
     def __init__(self, name, ticker, price=-1, date=None, peRatio=0,
                  marketCap=0.0, ipoYear="1900",  sector="", industry=""):
-        self._url="https://finance.yahoo.com/quote/"+ticker +"/analysis"
+        self._url="https://finance.yahoo.com/quote/"+(ticker).lower() +"/analysis"
         self._ticker = ticker
         self._displayName = name
         self._stockPrice = price
@@ -77,6 +77,8 @@ class Company():
         self._marketCap = marketCap
         self._industry = industry
         self._ipoYear = ipoYear
+        self._freeCashFlow = 0
+
 
         self._growthRate = {Time.FIVE_YEAR: 0, Time.TEN_YEAR: 0}
         self._marginOfSaftyPrice = 0.0
@@ -84,6 +86,7 @@ class Company():
         self._info = None
         self._trailingEps = 0.0
         self.minimumRateOfReturn ={}
+        self._totalDebt = None
         # {RateOfReturn.THREE: None, RateOfReturn.SIX: None, RateOfReturn.TE: None,
         #                             RateOfReturn.TWELVE: None, RateOfReturn.FIFTEEN: None, RateOfReturn.TWENTY: None,
         #                             RateOfReturn.TWENTY_FIVE: None, RateOfReturn.THIRTY: None,
@@ -168,14 +171,13 @@ class Company():
         # self.peRation = info.get("trailingPE") # or self.peRation(self.info("forwardPE"))
         # self.freeCashFlow = info.get("freeCashflow")
         # # self.growthRate = info.get()
-        print(self)
+        # print(self)
         restclient= SimpleRestClient()
-        htmlResponse = restclient.getClient(self._url)
-        print("-------- \n\n\n\n")
-        print(htmlResponse)
-        print("-------- \n\n\n\n")
+        self._peRatio = info.get("trailingPE")
+        response = restclient.getClient(self._url)
+        parser = html.fromstring(response.text)
+        self._growthRate= {Time.FIVE_YEAR : parser.xpath('/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[1]/div/div/section/table[6]/tbody/tr[5]/td[2]')[0].text}
 
-        # response  = HTMLParser.handle_data(htmlResponse)
         return info
 
     @property
@@ -242,6 +244,8 @@ class Company():
 
     @property
     def totalDebt(self):
+        if not self._totalDebt and self._info:
+            self._totalDebt  = self._info.get("totalDebt")
         return self._totalDebt
 
     @totalDebt.setter
@@ -250,6 +254,8 @@ class Company():
 
     @property
     def freeCashFlow(self):
+        if not self._freeCashFlow :
+            self._freeCashFlow = self._info.get("freeCashflow")
         return self._freeCashFlow
 
     @freeCashFlow.setter
@@ -276,13 +282,13 @@ class Company():
     def date(self):
         return self._date
 
-    @property
-    def buyingOption(self):
-        return self._buyingOption
-
-    @buyingOption.setter
-    def buyingOption(self, buyingOption):
-        self._buyingOption = buyingOption
+    # @property
+    # def buyingOption(self):
+    #     return self._buyingOption
+    #
+    # @buyingOption.setter
+    # def buyingOption(self, buyingOption):
+    #     self._buyingOption = buyingOption
 
     '''
 self._displayName = name
@@ -290,11 +296,16 @@ self._displayName = name
         self._buyingOption = BuyingOption.DID_NOT_EVALUATE
     '''
 
-    # def __str__(self):
-    #     return "{ " + "'Name':'" + self.displayName + "', 'Symbol':'" + self.ticker + "', 'sector':" + self.sector \
-    #            + "', 'ipoYear':'" + self.ipoYear + "', 'industry':'" + self.industry + "', 'price':" + str(
-    #         self.stockPrice) + ", 'peRation':" + str(
-    #         self.peRation) + ", 'marginOfSaftyPrice': " + str(self.marginOfSaftyPrice) + ", 'debt':" + str(
-    #         self.totalDebt) + ", 'freeCashFlow':" + str(self.freeCashFlow) + ", 'growthRate':" + str(
-    #         self._growthRate) + ", 'marketCap':" + str(
-    #         self.marketCap) + ", 'date':" + self.date + ", 'buyingOption':'" + str(self.buyingOption.value) + "' }"
+    def __str__(self):
+        self.process()
+        return "{ " + "'Name':'" + self.displayName + "', 'Symbol':'" + self.ticker + "', 'sector':" + self.sector \
+               + "', 'ipoYear':'" + self.ipoYear + "', 'industry':'" + self.industry + "', 'price':" + str(
+            self.stockPrice) + ", 'peRation':" + str(
+            self.peRation) + ", 'marginOfSaftyPrice': " \
+               + str(self.marginOfSaftyPrice) +\
+               ", 'debt':" +\
+               str(self.totalDebt) + \
+               ", 'freeCashFlow':" + str(self.freeCashFlow) + ", 'growthRate':" + str(
+            self._growthRate) + ", 'marketCap' : " + str(
+            self.marketCap) + ", 'date':" + self.date + "}"
+            # + ", 'buyingOption':'" + str(self.buyingOption.value) + "' }"

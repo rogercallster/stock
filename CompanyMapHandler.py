@@ -35,5 +35,5 @@ class CompanyMapHandler():
                 self.company[symbol.lower()] = Company(name=name, ticker=symbol, sector=sector, ipoYear=ipoYear,
                                                        industry=industry, date=date.today().strftime("%d/%m/%Y"))
         reader.close()
-        print(self.company["now"])
+        # print(self.company["now"])
         return self.company

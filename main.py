@@ -24,8 +24,8 @@ def print_hi(name):
     #value : ticker
     # this function takes in file name to generate map by default its file inside extra/nasdaq_screener_xxxxx.csv
     companieyMap = t.getTickersFromStockExchange(None)
-    companieyMap.get("now").process()
-
+    companieyMap.get("vmw").process()
+    print((companieyMap.get("vmw")))
 
 
 # Press the green button in the gutter to run the script.
