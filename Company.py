@@ -185,6 +185,7 @@ class Company():
         value = yf.Ticker(self.ticker)
         print(value.get_recommendations())
         self._info = value.get_info()
+        # self.balaceSheet=value.balance_sheet.
         return self._info
 
     # todo calculate it
@@ -272,7 +273,7 @@ class Company():
 
     @property
     def marketCap(self):
-        return self._marketCap
+        return self._info.get("marketcap")
 
     @marketCap.setter
     def marketCap(self, capVal):

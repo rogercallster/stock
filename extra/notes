@@ -1,5 +1,20 @@
 
 
+Important number:
+
+1. Book value
+2. Free cash flow
+3. Earnings
+4. Sales growth
+5. Earning growth
+6. Income growth
+7. PE
+8. Owners earning
+9. Discounted price (5 years basis)
+10. margin price = min(based on book value, based on earning, based on free cash flow, based on growth rate )
+
+
+
 1. companies value = debt to equity ratio :: write code
 2. margin of safety value : code ready
 3. RED FLAG —> If company is selling several times its growth rate and earning it red flag
@@ -9,9 +24,11 @@
 7. net growth rate: todo
 8. knowing industry specifics debt to capitalization is very important to know
 9. add up long term debt and total equity and that is good approximation of company capitalization (now compare long term debt to total capitalization... If total debt is more than half the company capitalizaation or more than its too much of debt.. In contast if debt is 20% or less is faily low debt)
-10. Book value
+10. ...... Book value = Total assets − Total liabilities (from 10k)
 11. Sales growth vs price growth
 12. Market size and saturation
+13. Free cash flow = sales revenue - (operating costs + taxes) - required investments in operating capital.
+    Free cash flow = net operating profit after taxes - net investment in operating capital.
 
 Checklists of valuation
 
