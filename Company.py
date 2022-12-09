@@ -382,3 +382,6 @@ class Company():
 #         if isinstance(data, dict):
 #             return {self.key_to_json(key): self.to_json(data[key]) for key in data}
 #         raise TypeError
+#     def toJSON(self):
+#         return json.dumps(self, default=lambda o: o.__dict__,
+#             sort_keys=True, indent=4)

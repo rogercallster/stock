@@ -42,7 +42,7 @@ def procesEachCompany(companyMap):
         for company in companyMap.keys():
             print("Company -> ", company , "=============\t\t\t\t\t========\n\n")
             s=(companyMap.get(company.lower()).process())
-            print(s.)
+            print(s)
             # print("s json == ", json.dumps(s.to_json(s)))
             # print("str  ", str(s) )
             break

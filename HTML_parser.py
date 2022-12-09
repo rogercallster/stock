@@ -65,12 +65,13 @@ class HtmlParser():
 
             try:
                 element = dom.xpath(path)[0].text
+                # if not element.isnumeric(): continue
                 path = xpath + "[" + str(i) + "]"
                 i += 1
-                print(element)
+                # print(element)
                 result.append(element)
             except:
-                print("reached index end ", str(i))
+                # print("reached index end ", str(i))
                 return result
 
     def fillCompanyDetails(self, ticker):
@@ -115,10 +116,12 @@ class HtmlParser():
 
 
 htmlParser = HtmlParser()
-for i in ["GOOG", "NOW", "CRWD", "AMZN", "VMW", "TEAM", "uber"]:
+import jsonpickle
+for i in ["GOOG", "NOW", "CRWD", "AMZN", "VMW", "TEAM", "uber", "brk-b"]:
     # print(json.dumps(htmlParser.fillCompanyDetails(i)))
-    print(json.loads(htmlParser.fillCompanyDetails(i)))
-    print((htmlParser.fillCompanyDetails(i)))
+    # print(json.loads(htmlParser.fillCompanyDetails(i)))
+    # print((htmlParser.fillCompanyDetails(i)))
+    print(jsonpickle.encode(htmlParser.fillCompanyDetails(i)))
     # soup = htmlParser.getSoup(i)
     # dom = etree.HTML(str(soup))
     # print("name " , dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[2]/div[2]/h1")[0].text)
