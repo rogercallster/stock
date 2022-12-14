@@ -12,9 +12,17 @@ Freecash flow = EBIT - Taxes + Depriciation and Amortization - Capital Expeditur
 
 
 **Intrinsic Value**
-Intrinsic value = (CF1)/(1 + r)^1 + (CF2)/(1 + r)^2 + (CF3)/(1 + r)^3 + ... + (CFn)/(1 + r)^n = 
+```It is the discounted value of the cash that can be taken out of a business during its remaining life. Warren likes this value called Owners’ Earnings. It’s basically how much the owners of the company take home in cash.```
 
-```Sn = a(r^n - 1) / (r - 1)```
+
+This is how Warren Buffett defines its calculation:
+
+
+```Intrinsic value = (CF1)/(1 + r)^1 + (CF2)/(1 + r)^2 + (CF3)/(1 + r)^3 + ... + (CFn)/(1 + r)^n = Sn = a(r^n - 1) / (r - 1)``` 
+
+
+
+```
 
  expected growth for next five year in average  eg Berkshire has it at 23 for next 5 years
 
@@ -29,15 +37,6 @@ Market cap /Freecashflow = 26.631478294128897
 Alphabet Free cash flow = 67.012B
 Market cap =  1300 B
 Market cap /Freecashflow = 19.399510535426491
-
-
-
-
-Amazon free cash flow for the quarter ending September 30, 2022 was -25,302.00, a year-over-year.
-Amazon free cash flow for the twelve months ending September 30, 2022 was , a year-over-year.
-Amazon annual free cash flow for 2021 was $-9.069B, a 129.24% decline from 2020.
-Amazon annual free cash flow for 2020 was $31.02B, a 20.12% increase from 2019.
-Amazon annual free cash flow for 2019 was $25.825B, a 33.12% increase from 2018.
 
 Market cap = 960.28
 
@@ -66,8 +65,7 @@ Freecashflow = 0.813B
 Market cap /Freecashflow = 44.317343173431734
 
 
-apple 
-
+apple
 Market cap = 2340
 Freecashflow = 111.443B
 Market cap /Freecashflow = 20.997281121290705
@@ -77,3 +75,12 @@ Market cap /Freecashflow = 20.997281121290705
 
 ```CF1 is cash flow in year 1, CF2 is cash flow in year 2, etc.```
 
+
+**There are multiple ways of valuation of a stock but I guess most important at this point are**
+
+``` 
+    a) calculate free cash flow averaged for last 3-5 years neglecting any abnormal ups and downs (neglect outliars ) 
+    b) calculate book value for last 3-5 years neglecting any abnormal ups and downs (neglect outliars )
+    c) calcualte debt (long term + short term)
+    d) Buffet scale "divide owner earnings by the difference between the discount rate and growth rate"
+```
