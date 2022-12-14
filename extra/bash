@@ -1,0 +1,41 @@
+git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+export PS1="[\u@\h \w]\[\033[00;32m\]\$(git_branch)\[\033[00m\]\$ "
+PATH=/Users/ankursaran/bin:/Users/ansaran/Library/Python/3.8/lib/python/site-packages:/Users/ankursaran/bin:/Users/ansaran/Library/Python/3.8/bin:$PATH
+##########################ALIAS########################################3
+alias gamend='git commit --amend'
+
+alias gstatus='git status'
+alias glog='git log'
+alias gshow='git show'
+alias gpatch='git format-patch -1'
+alias k='kubectl'
+alias jump='ssh root@10.203.41.237'
+alias jvisual='/Applications/VisualVM.app/Contents/MacOS/visualvm --jdkhome /Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home'
+alias edit='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+
+alias jpsclear="jps | awk '{if($2 ne )print($1) }' | xargs kill -9"
+alias sublime=' /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl . '
+#######################################################################
+#KUBECTL ref https://medium.com/merapar/fixing-bash-autocompletion-on-macos-for-kubectl-and-kops-e87f019652e8
+source <(kubectl completion bash)
+source <(kops completion bash)
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
+#################################################################
+# echo 'export PATH="/usr/local/opt/node@12/bin:$PATH"' >> /Users/ankursaran/.bash_profile
+export PATH="/Users/ansaran/.bazel/bin:$PATH"
+export PATH="/usr/local/opt/node@12/bin:$PATH"
+
+# export JAVA_8_HOME=/Library/java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home
+export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+export visualvm_jdkhome=$(/usr/libexec/java_home -v1.8)
+# export JAVA_HOME=$(/usr/libexec/java_home -v1.8)
+export JAVA_HOME=/Library/java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home
+alias java8='export JAVA_HOME=$JAVA_8_HOME'
+
+KUBE_EDITOR="vim"
+export PATH="/usr/local/opt/libpq/bin:$PATH"
