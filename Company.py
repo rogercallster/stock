@@ -8,7 +8,6 @@ from lxml import html
 import json
 import csv
 
-
 '''
 Equity :  Equity indicates an ownership position in an asset. In most cases, equity indicates a total ownership stake in
  a company. So if, for example, you have a 15% equity in a company, you own 15% of that company and are entitled to 15%
@@ -72,9 +71,10 @@ class Company():
     freeCashFlow={},
     '''
 
-    def __init__(self,dom=None, name='', ticker='', price=-1, date=None, peRatio=0,
-                 marketCap=0.0, shareVolume=0.0, peRatioSnp500=0.0, years=[],  revenuePerShare=[],fcfPerShare=[],capexPerShare=[],bookValuePerShare=[],
-                 netProfitMarginPerShare=[], debt=[], returnOnCapital=[]):
+    def __init__(self, dom=None, name='---------', ticker='', price=-1, date=None, peRatio=0,
+                 marketCap=0.0, shareVolume=0.0, peRatioSnp500=0.0, years=[], revenuePerShare=[], fcfPerShare=[],
+                 capexPerShare=[], bookValuePerShare=[],
+                 netProfitMarginPerSharePercentage=[], debt=[], returnOnCapitalPercentage=[], roicPercentage=[]):
         # self.comapany_url = "https://finance.yahoo.com/quote/" + (ticker).lower() + "/analysis"
         self.ticker = ticker
         self.displayName = name
@@ -89,16 +89,16 @@ class Company():
         self.company_info = None
         self.trailingEps = 0.0
         self.minimumRateOfReturn = {}
-        self.totalDebt = None
+        self.totalDebt = debt
         self.dom = dom
         self.years = years
         self.revenuePerShare = revenuePerShare
         self.fcfPerShare = fcfPerShare
         self.capexPerShare = capexPerShare
         self.bookValuePerShare = bookValuePerShare
-        self.netProfitMarginPerShare = netProfitMarginPerShare
-        self.debt = debt
-        self.returnOnCapital = returnOnCapital
+        self.netProfitMarginPerSharePercentage = netProfitMarginPerSharePercentage
+        self.returnOnCapitalPercentage = returnOnCapitalPercentage
+        self.roicPercentage = roicPercentage
         # {RateOfReturn.THREE: None, RateOfReturn.SIX: None, RateOfReturn.TE: None,
         #                             RateOfReturn.TWELVE: None, RateOfReturn.FIFTEEN: None, RateOfReturn.TWENTY: None,
         #                             RateOfReturn.TWENTY_FIVE: None, RateOfReturn.THIRTY: None,
@@ -160,6 +160,7 @@ class Company():
         # self._averageVolume =0
         # self._volume = 0
         #
+
     # def toCsv(self):
     #     format = "%d-%m-%y__%H-%M-%S"
     #

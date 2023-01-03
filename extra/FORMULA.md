@@ -1,5 +1,50 @@
 Important formulas
 ==================
+[REF Beautify the ___MD___ markdown](https://www.markdownguide.org/basic-syntax/) 
+[ROIC link ](https://roic.ai/company/GOOG)
+[Buffet ROIC explaination for ref](einvestingforbeginners)
+
+
+******Warren buffet good bussiness******
+
+- A good bussiness is  bussiness which produces good ROI (Good ROI ratio)
+- A very good bussiness is a bussiness that grows with great ROI
+
+***Good Investment***
+- Good priced great business
+  1. High ROI business
+  2. Free cash flow growth is good
+  3. Discount cash flow (my acceptable discount rate is between 12-15%) price for long term price multiplied by acceptable PE ratio 
+
+    
+
+***Important formuls***
+- ___Discount rate calculator___
+
+     ```Sn = (r^n - 1) / (r - 1)```
+```
+#Code
+#-------
+map = {}
+for rate in range(2, 27):
+  r =  1+(rate*0.01)
+  map[r] = {}
+  map[r][0] = 1
+  for year in range(1,11):#to take care for next 25 years of projection
+    map[r][year] = map[r][year-1] * r  
+for rate in map:
+  print(rate , map[rate])
+```
+
+
+
+
+
+
+
+
+
+
 
 **Freecash flow**
 

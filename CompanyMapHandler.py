@@ -29,7 +29,7 @@ class CompanyMapHandler():
                 counter += 1
                 if counter == 1:
                     continue
-                print(line)
+                # print(line)
                 symbol, name, country, ipoYear, sector, industry = line.strip().split(",")
 
                 self.company[symbol.lower()] = Company(name=name, ticker=symbol, sector=sector, ipoYear=ipoYear,

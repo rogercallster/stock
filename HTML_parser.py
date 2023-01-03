@@ -2,7 +2,7 @@ import json
 
 from bs4 import BeautifulSoup
 from lxml import etree
-
+import jsonpickle
 from Company import Company
 from SimpleRestClient import SimpleRestClient
 
@@ -74,54 +74,79 @@ class HtmlParser():
                 # print("reached index end ", str(i))
                 return result
 
-    def fillCompanyDetails(self, ticker):
-        dom = self.getDom(ticker)
-        name = dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[2]/div[2]/h1")[0].text
-        # print("name ", name)
-        stockPrice = float(dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[3]/div[1]/div[1]/h1")[0].text)
-        # print("stockPrice ", stockPrice)
-        marketCap = (dom.xpath("/html/body/div[1]/div/main/div[2]/div[1]/div[3]/div[3]/div[4]/span[1]")[0].text)
-        # print("Market cap: ", marketCap)
-        peRatio = float(dom.xpath("/html/body/div[1]/div/main/div[2]/div[1]/div[3]/div[3]/div[1]/span[1]")[0].text)
-        # print("P/E ration ", peRatio)
-        peRatioSnp500 = dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[3]/div[3]/div[3]/span[1]")[0].text
-        # print("P/E to SNP 500  ", peRatioSnp500)
-        nextEarningCall = dom.xpath("/html/body/div/div/main/div[3]/div/div[1]/div/div[1]/div[1]/div[1]/div[3]")[0].text
-        # print("Next earning call ", nextEarningCall)
+    def fillCompanyDetails(self, ticker, company):
+        if "^" in ticker:
+            print("Ticker before " + ticker + " ticker after trim = "+ ticker[:-2])
+            ticker = ticker[:-2]
+        if "/" in ticker:
+            print("change " + ticker  + " " + ticker.replace("/","-"))
+            ticker=ticker.replace("/","-")
 
-        shareVolume = float(
-            dom.xpath("/html/body/div/div/main/div[3]/div/div[1]/div/div[1]/div[1]/div[11]/div[3]")[0].text) * 1000000
-        # print("Volume ", shareVolume)
+        try:
+            dom = self.getDom(ticker)
+            name = dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[2]/div[2]/h1")[0].text
+            # print("name ", name)
+            stockPrice = float(dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[3]/div[1]/div[1]/h1")[0].text)
+            # print("stockPrice ", stockPrice)
+            marketCap = (dom.xpath("/html/body/div[1]/div/main/div[2]/div[1]/div[3]/div[3]/div[4]/span[1]")[0].text)
+            # print("Market cap: ", marketCap)
+            peRatio = float(dom.xpath("/html/body/div[1]/div/main/div[2]/div[1]/div[3]/div[3]/div[1]/span[1]")[0].text)
+            # print("P/E ration ", peRatio)
+            peRatioSnp500 = dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[3]/div[3]/div[3]/span[1]")[0].text
+            # print("P/E to SNP 500  ", peRatioSnp500)
+            nextEarningCall = dom.xpath("/html/body/div/div/main/div[3]/div/div[1]/div/div[1]/div[1]/div[1]/div[3]")[0].text
+            # print("Next earning call ", nextEarningCall)
 
-        # /html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[1]/span
-        # /html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[2]/div[5]
-        # /html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[2]/div[6]
-        years = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[2]/div[2]/div", 5)
-        revenuePerShare = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[2]/div", 5)
-        fcfPerShare = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[5]/div[2]/div", 5)
-        capexPerShare = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[7]/div[2]/div", 5)
-        bookValuePerShare = self.domArrayParser(dom,"/html/body/div/div/main/div[3]/div/div[1]/div/div[8]/div[2]/div", 5)
-        netProfitMarginPerShare = self.domArrayParser(dom,"/html/body/div[1]/div/main/div[3]/div/div[1]/div/div[18]/div[2]/div", 5)
-        debt = self.domArrayParser(dom,"/html/body/div[1]/div/main/div[3]/div/div[1]/div/div[20]/div[2]/div", 5)
-        returnOnCapital = self.domArrayParser(dom,"/html/body/div/div/main/div[3]/div/div[1]/div/div[24]/div[2]/div", 5)
+            shareVolume = float(
+                dom.xpath("/html/body/div/div/main/div[3]/div/div[1]/div/div[1]/div[1]/div[11]/div[3]")[0].text) * 1000000
+            # print("Volume ", shareVolume)
 
-        company = Company(dom=dom, ticker=ticker, name=name, price=stockPrice, marketCap=marketCap, peRatio=peRatio,
-                          shareVolume=shareVolume,
-                          peRatioSnp500=peRatioSnp500, years=years, revenuePerShare=revenuePerShare,
-                          fcfPerShare=fcfPerShare, capexPerShare=capexPerShare, bookValuePerShare=bookValuePerShare,
-                          netProfitMarginPerShare=netProfitMarginPerShare, debt=debt, returnOnCapital=returnOnCapital
-                          )
+            # /html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[1]/span
+            # /html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[2]/div[5]
+            # /html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[2]/div[6]
+            years = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[2]/div[2]/div", 5)
+            revenuePerShare = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[3]/div[2]/div", 5)
+            fcfPerShare = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[5]/div[2]/div", 5)
+            capexPerShare = self.domArrayParser(dom, "/html/body/div/div/main/div[3]/div/div[1]/div/div[7]/div[2]/div", 5)
+            bookValuePerShare = self.domArrayParser(dom,"/html/body/div/div/main/div[3]/div/div[1]/div/div[8]/div[2]/div", 5)
+            netProfitMarginPerShare = self.domArrayParser(dom,"/html/body/div[1]/div/main/div[3]/div/div[1]/div/div[18]/div[2]/div", 5)
+            # debt = self.domArrayParser(dom,"/html/body/div[1]/div/main/div[3]/div/div[1]/div/div[20]/div[2]/div", 5)
+            returnOnCapitalPercentage = self.domArrayParser(dom,"/html/body/div/div/main/div[3]/div/div[1]/div/div[24]/div[2]/div", 5)
+            # //*[@id="__next"]/div/main/div[3]/div/div[1]/div/div[22]/div[2]/div[3]
+            roicPercentage = self.domArrayParser(dom,"/html/body/div/div/main/div[3]/div/div[1]/div/div[22]/div[2]/div", 5)[:-1]
+            debt = "NA"
+            if "-" not in dom.xpath("/html/body/div/div/main/div[3]/div/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/text()[2]")[0]:
+                debt =float( dom.xpath("/html/body/div/div/main/div[3]/div/div[2]/div[1]/div[1]/div[3]/div[1]/div[2]/text()[2]")[0].strip().replace(",",""))/1000
+            company = Company(dom=dom, ticker=ticker, name=name, price=stockPrice, marketCap=marketCap, peRatio=peRatio,
+                              shareVolume=shareVolume,
+                              peRatioSnp500=peRatioSnp500, years=years, revenuePerShare=revenuePerShare,
+                              fcfPerShare=fcfPerShare, capexPerShare=capexPerShare, bookValuePerShare=bookValuePerShare,
+                              netProfitMarginPerSharePercentage=netProfitMarginPerShare, debt=debt, returnOnCapitalPercentage=returnOnCapitalPercentage,
+                              roicPercentage = roicPercentage,
+
+                              )
+        except Exception as e:
+            print("Ticker::  " + ticker + " NAME: " + company["name"])
+            print(e)
+            return None
+            # company = Company(name=company["name"], ticker=company["symbol"], debt=1000000, roicPercentage=["(10000)%","(10000)%","(10000)%","(10000)%","(10000)%"])
+
 
         return company
 
 
-htmlParser = HtmlParser()
-import jsonpickle
-for i in ["GOOG", "NOW", "CRWD", "AMZN", "VMW", "TEAM", "uber", "brk-b"]:
+
+    def construct(self, ticker, company):
+        # print(jsonpickle.encode(htmlParser.fillCompanyDetails(i)))
+        htmlParser= HtmlParser()
+        return htmlParser.fillCompanyDetails(ticker, company)
+
+# htmlParser = HtmlParser()
+# for i in ["GOOG"]:
     # print(json.dumps(htmlParser.fillCompanyDetails(i)))
     # print(json.loads(htmlParser.fillCompanyDetails(i)))
     # print((htmlParser.fillCompanyDetails(i)))
-    print(jsonpickle.encode(htmlParser.fillCompanyDetails(i)))
+    # print(jsonpickle.encode(htmlParser.fillCompanyDetails(i)))
     # soup = htmlParser.getSoup(i)
     # dom = etree.HTML(str(soup))
     # print("name " , dom.xpath("/html/body/div/div/main/div[2]/div[1]/div[2]/div[2]/h1")[0].text)
@@ -140,3 +165,28 @@ for i in ["GOOG", "NOW", "CRWD", "AMZN", "VMW", "TEAM", "uber", "brk-b"]:
     # print(" ", dom.xpath("")[0].text)
     # print(" ", dom.xpath("")[0].text)
     # print(" ", dom.xpath("")[0].text)
+ticker="AAIN"
+p=HtmlParser()
+# ob=            {
+#                 "symbol": "AAIN",
+#                 "name": "Arlington Asset Investment Corp 6.000% Senior Notes Due 2026",
+#                 "lastsale": "$23.50",
+#                 "netchange": "0.03",
+#                 "pctchange": "0.128%",
+#                 "volume": "511",
+#                 "marketCap": "0.00",
+#                 "country": "United States",
+#                 "ipoyear": "",
+#                 "industry": "Finance/Investors Services",
+#                 "sector": "Finance",
+#                 "url": "/market-activity/stocks/aain"
+#             }
+# ob={}
+# ob={"symbol":"AAIN", "name":""}
+#
+# p.fillCompanyDetails(ticker,ob )
+# ob={"symbol":"BKDT", "name":"Brookdale Senior Living Inc. 7.00% Tangible Equity Units"}
+# p.fillCompanyDetails(ticker,ob )
+
+# ob={"symbol":"GOOG", "name":"google"}
+# p.fillCompanyDetails(ob["symbol"],ob )
